@@ -1,7 +1,20 @@
-## Introduction
-1. Build the application from your root of the project
+### Introduction
+
+This is a sample application if you want to connect BTP Redis instance from localhost.
+You can use Redis for
+- Caching - For optimizing and reducing API calls
+- Redis Streams - For Event Driven Architecture 
+
+#### Pre-requisites
+1. You have a BTP subaccount provisionsed.
+2. Redis entitlement available in your subaccount.
+3. You have cloned this repo on your local machine.
+
+### Local set up 
+
+2. Build the application from your root of the project
 ```
-mbt build
+npm install && mbt build
 ```
 
 2. Deploy the application
@@ -50,3 +63,15 @@ redis-cli -h 127.0.0.1 -p 6380 --tls -a <redis_password_from_service_key>
 ```
 
 11. Test by typing - `PING`. Redis should return `PONG`
+
+12. Test by adding event to Redis streams
+```
+XADD order_events * event "ORDER_CREATED" orderId "ORD12345" customerId "CUST7890" amount "299.99" currency "USD"
+```
+
+13. Check if the event is available in Redis streams
+```
+XRANGE order_events - +
+```
+
+14. Now you can use localhost - 127.0.0.1 and port 6380 in your CAP application on localhost and connect to redis instance on BTP.
