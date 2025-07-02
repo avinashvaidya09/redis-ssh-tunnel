@@ -1,0 +1,12 @@
+{
+    "name": "redis-ssh-tunnel",
+    "version": "1.0.0",
+    "description": "Tunnel app for Redis on BTP CF",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "dependencies": {
+        "express": "^5.1.0"
+    }
+}

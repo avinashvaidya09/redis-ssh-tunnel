@@ -1,0 +1,5 @@
+node_modules/
+dist/
+mta_archives/
+.DS_Store
+.env

@@ -1,0 +1,30 @@
+ID: redis-ssh-tunnel
+version: 0.0.1
+_schema-version: '3.1.0'
+
+modules:
+  - name: redis-ssh-tunnel-app
+    type: nodejs
+    path: app
+    properties:
+      buildpack: nodejs_buildpack
+      start-command: npm start
+      memory: 512M
+      disk-quota: 1G
+    requires:
+      - name: redis-hyperscaler-service
+      - name: feature-flags-service
+
+resources:
+  - name: redis-hyperscaler-service
+    type: org.cloudfoundry.managed-service
+    optional: false
+    active: true
+    parameters:
+      service: redis-cache
+      service-plan: development
+  - name: feature-flags-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: feature-flags
+      service-plan: standard
